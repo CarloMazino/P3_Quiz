@@ -25,7 +25,7 @@ rl.on('line', (line) => {
         break;
       case 'q':
       case'quit':
-            rl.close();
+            quitCmd();
         break;
       case 'p':
       case 'play':
@@ -53,7 +53,7 @@ rl.on('line', (line) => {
             editCmd();
         break;
       case 'credits':
-            console.log('Autores de la práctica:\n Marta Hernández Muela\n&\n Carlos Caro Álvarez');
+            creditsCmd();
         break;
       /*default:
       console.log(`Say what? I might have heard '${line.trim()}'`);
@@ -131,5 +131,20 @@ const editCmd = id => {
 const playCmd = () => {
     console.log('Jugar.');
 };
+/**
+ * Muestra los nombres de los autores de la práctica.
+ *
+ */
+const creditsCmd = () => {
+    console.log('Autores de la práctica:\n Marta Hernández Muela\n&\n Carlos Caro Álvarez');
+};
+/**
+ * Terminar el programa. 
+ *
+ */
+const quitCmd = () => {
+    rl.close();
+};
+
 
 
