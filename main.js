@@ -18,39 +18,43 @@ rl.on('line', (line) => {
       case '':
       break;
       default:
-        console.log(`\n¿'${line.trim()}'?\nCreo que te he entendido mal.\nPor favor introduce un comando válido.\nEjecutando comando help...\n`);
+            console.log(`\n¿'${line.trim()}'?\nCreo que te he entendido mal.\nPor favor introduce un comando válido.\nEjecutando comando help...\n`);
       case 'h':
       case 'help':
-        helpCmd();
+            helpCmd();
         break;
       case 'q':
       case'quit':
-        rl.close();
+            rl.close();
+        break;
+      case 'p':
+      case 'play':
+      playCmd();
         break;
       case 'add':
-        console.log('Añadir un nuevo quiz.');
+            addCmd();
         break;
       case 'list':
-        console.log('Listar todos los quizzes existentes.');
+            listCmd();
         break;
       case 'show':
-        console.log('Mostrar el quiz indicado.');
+            showCmd();
         break;
       case 'hello':
-        console.log("it's me");
+            console.log("it's me");
         break;
       case 'test':
-        console.log('Probar el quiz indicado.');
+            testCmd();
         break;
       case 'delete':
-        console.log('Borrar el quiz indicado.');
+            deleteCmd();
         break;
       case 'edit':
-          console.log('Editar el quiz indicado.');
-          break;
+            editCmd();
+        break;
       case 'credits':
-          console.log('Autores de la práctica:\n Marta Hernández Muela\n&\n Carlos Caro Álvarez');
-          break;
+            console.log('Autores de la práctica:\n Marta Hernández Muela\n&\n Carlos Caro Álvarez');
+        break;
       /*default:
       console.log(`Say what? I might have heard '${line.trim()}'`);
       break;*/
@@ -80,8 +84,52 @@ const helpCmd = () => {
 };
 /**
  * Lista todos los quizzes existentes en el modelo.
- 
  */
+const listCmd = () => {
+    console.log('Listar todos los quizzes existentes.');
+};
+/**
+ * Muestra el quiz indicado en el parámetro: la pregunta y la respuesta.
+ * @param id clave del quiz a mostrar.
+ */
+const showCmd = id => {
+    console.log('Mostrar el quiz indicado.');
+};
+/**
+ * Añade un nuevo quiz al modelo.
+ * @param id Clave del quiz a mostrar.
+ */
+const addCmd = () => {
+    console.log('Añadir un nuevo quiz.');
+};
+/**
+ * Prueba el quizz, es decir, hace una pregunta del modelo a la que debemos contestar.
+ * @param id clave del quiz a probar.
+ */
+const testCmd = id => {
+    console.log('Probar el quiz indicado.');
+};
+/**
+ * Borra un quizz del modelo.
+ * @param id Clave del quiz a borrar en el modelo.
+ */
+const deleteCmd = id => {
+    console.log('Borrar el quiz indicado.');
+};
+/**
+ * Edita un quiz del modelo.
+ * @param id Clave del quiz a editar en el modelo.
+ */
+const editCmd = id => {
+    console.log('Editar el quiz indicado.');
+};
 
+/**
+ * Pregunta todos los quizzes existentes en el modleo en orden alfabético.
+ * Se gana si contesta a todos satisfactoriamente.
+ */
+const playCmd = () => {
+    console.log('Jugar.');
+};
 
 
