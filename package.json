@@ -1,0 +1,25 @@
+{
+  "name": "quiz",
+  "version": "1.0.0",
+  "description": "Proyecto Quiz",
+  "main": "main.js",
+  "scripts": {
+    "start": "node main.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/carloscaralv/CORE_P2.git"
+  },
+  "keywords": [
+    "quiz",
+    "core",
+    "node"
+  ],
+  "author": "Carlos Caro Álvarez",
+  "license": "Unlicense",
+  "bugs": {
+    "url": "https://github.com/carloscaralv/CORE_P2/issues"
+  },
+  "homepage": "https://github.com/carloscaralv/CORE_P2#readme"
+}
