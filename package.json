@@ -9,7 +9,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/carloscaralv/CORE_P2.git"
+    "url": "git+https://github.com/CarloMazino/CORE_P2.git"
   },
   "keywords": [
     "quiz",
@@ -19,7 +19,11 @@
   "author": "Carlos Caro Álvarez",
   "license": "Unlicense",
   "bugs": {
-    "url": "https://github.com/carloscaralv/CORE_P2/issues"
+    "url": "https://github.com/CarloMazino/CORE_P2/issues"
   },
-  "homepage": "https://github.com/carloscaralv/CORE_P2#readme"
+  "homepage": "https://github.com/CarloMazino/CORE_P2#readme",
+  "dependencies": {
+    "chalk": "^2.3.1",
+    "figlet": "^1.2.0"
+  }
 }
