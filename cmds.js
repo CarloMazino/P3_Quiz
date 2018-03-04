@@ -61,8 +61,15 @@ exports.showCmd = (rl, id) => {
  * @param id Clave del quiz a mostrar.
  */
 exports.addCmd = rl => {
-    log('Añadir un nuevo quiz.','red');
-    rl.prompt();
+    rl.question(colorize('Introduzca una pregunta: ', 'red'), question =>{
+        rl.question(colorize('Introduzca la respuesta ','red'), answer => {
+            model.add(question, answer);
+            log(`${colorize('Se ha añadido','magenta')}: ${question} ${colorize('=>','magenta')} ${answer}`);
+            rl.prompt();
+        });
+    });
+    //log('Añadir un nuevo quiz.','red');
+    //rl.prompt();
 };
 /**
  * Prueba el quizz, es decir, hace una pregunta del modelo a la que debemos contestar.
@@ -77,7 +84,16 @@ exports.testCmd = (rl, id) => {
  * @param id Clave del quiz a borrar en el modelo.
  */
 exports.deleteCmd = (rl, id) => {
-    log('Borrar el quiz indicado.','red');
+    if (typeof id === "undefined"){
+        errorlog(`Falta el parámetro id.`);
+    }else{
+        try{
+            model.deleteByIndex(id);
+        }catch(error){
+            errorlog(error.message);
+        }
+    }
+    //log('Borrar el quiz indicado.','red');
     rl.prompt();
 };
 /**
@@ -85,8 +101,30 @@ exports.deleteCmd = (rl, id) => {
  * @param id Clave del quiz a editar en el modelo.
  */
 exports.editCmd = (rl,id) => {
-    log('Editar el quiz indicado.','red');
-    rl.prompt();
+    if (typeof id === "undefined"){
+        errorlog(`Falta el parámetro id.`);
+        rl.prompt();
+    }else{
+        try{
+            const quiz = model.getByIndex(id);
+            process.stdout.isTTY && setTimeout(() => {rl.write(quiz.question)},0);
+
+            rl.question(colorize('Introduzca una pregunta: ', 'red'), question =>{
+
+                process.stdout.isTTY && setTimeout(() => {rl.write(quiz.answer)},0);
+
+                rl.question(colorize('Introduzca la respuesta ','red'), answer => {
+                    model.update(id, question, answer);
+                    log(`Se ha cambiado el quiz ${colorize(id,'magenta')} por: ${question} ${colorize('=>','magenta')} ${answer}`);
+                    rl.prompt();
+            });
+        });  
+        }catch(error){
+            errorlog(error.message);
+            rl.prompt();
+        }
+    }
+    //log('Editar el quiz indicado.','red');
 };
 
 /**
