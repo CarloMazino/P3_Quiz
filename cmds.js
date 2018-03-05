@@ -76,8 +76,33 @@ exports.addCmd = rl => {
  * @param id clave del quiz a probar.
  */
 exports.testCmd = (rl, id) => {
-    log('Probar el quiz indicado.','red');
-    rl.prompt();
+    if (typeof id === "undefined"){
+        errorlog(`Falta el parámetro id.`);
+        rl.prompt();
+    }else{
+        try{
+            //let n_pregunta = 1;
+            //let n_acierto = 0;
+            //let n_fallo = 0;
+            const quiz = model.getByIndex(id);
+            rl.question(colorize(`Pregunta ${id}: ${quiz.question} `,'red'), resp => {
+                if (resp == quiz.answer){
+                    //Correcto
+                    biglog('¡Correcto!','green');
+                }else{
+                    //Incorrecto
+                    biglog('Aber Estudiao.','red');
+                }
+                rl.prompt();
+            });
+
+        }catch(error){
+            errorlog(error.message);
+            rl.prompt();
+        }
+    }
+    //log('Probar el quiz indicado.','red');
+    //rl.prompt();
 };
 /**
  * Borra un quizz del modelo.
@@ -132,8 +157,43 @@ exports.editCmd = (rl,id) => {
  * Se gana si contesta a todos satisfactoriamente.
  */
 exports.playCmd = rl => {
-    log('Jugar.','red');
-    rl.prompt();
+    let score=0;
+    let toBeSolved = [];
+    let quizzes=model.getAll();
+    let size = quizzes.length;
+    for (let i=0; i<size; i++){
+        toBeSolved.push(i);
+    }
+    const playOne = () =>{
+        log(toBeSolved,'green');
+        if ((toBeSolved === null)||(toBeSolved.length===0)){
+            log('No hay nada más que preguntar.');
+            log('Fin del examen. Aciertos: ');
+            biglog(`${score}`,'magenta');
+            rl.prompt();
+        }else{
+            let index=Math.floor(Math.random() * toBeSolved.length);
+            let quiz = quizzes[index];
+            rl.question(`${colorize(quiz.question,'red')}${colorize('? ','red')}`, answer=>{
+                if (answer.toLowerCase().trim() === quiz.answer.toLowerCase().trim()){
+                    score++;
+                    toBeSolved.splice(index,1);
+                    quizzes.splice(index,1);
+                    log(`CORRECTO - lleva ${score} aciertos`);
+                    playOne();
+                }else{
+                    log(`INCORRECTO\n Fin del examen. Aciertos:`);
+                    biglog(`${score}`,'magenta');
+                    rl.prompt();
+                }
+            }
+
+            );
+        }
+    }
+    //log('Jugar.','red');
+    //rl.prompt();
+    playOne();
 };
 /**
  * Muestra los nombres de los autores de la práctica.
@@ -167,7 +227,15 @@ exports.quitCmd = rl => {
  *
  */
 exports.senateCmd = rl => {
-    log("I thought not. It's not a story the Jedi would tell you. It's a Sith legend. Darth Plagueis was a Dark Lord of the Sith, so powerful and so wise he could use the Force to influence the midichlorians to create life... He had such a knowledge of the dark side that he could even keep the ones he cared about from dying. The dark side of the Force is a pathway to many abilities some consider to be unnatural. He became so powerful... the only thing he was afraid of was losing his power, which eventually, of course, he did. Unfortunately, he taught his apprentice everything he knew, then his apprentice killed him in his sleep. It's ironic; he could save others from death, but not himself.",'red'
-    );
-    rl.prompt();
+    rl.question(colorize('Have you ever heard the tragedy of Darth Plagueis the Wise?\n','white'), answer=>{
+        if (answer==="yes"||answer==="y"||answer==="Yes"||answer==="y"){
+            log (`Ah! I see you are a man of culture as well.`,'white');
+            rl.prompt();
+        }else{
+            log("I thought not. It's not a story the Jedi would tell you. It's a Sith legend. Darth Plagueis was a Dark Lord of the Sith, so powerful and so wise he could use the Force to influence the midichlorians to create life... He had such a knowledge of the dark side that he could even keep the ones he cared about from dying. The dark side of the Force is a pathway to many abilities some consider to be unnatural. He became so powerful... the only thing he was afraid of was losing his power, which eventually, of course, he did. Unfortunately, he taught his apprentice everything he knew, then his apprentice killed him in his sleep. It's ironic; he could save others from death, but not himself.",'red');
+            rl.prompt();
+    }
+    });
+    
+    
 };
