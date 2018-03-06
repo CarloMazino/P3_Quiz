@@ -86,7 +86,7 @@ exports.testCmd = (rl, id) => {
             //let n_fallo = 0;
             const quiz = model.getByIndex(id);
             rl.question(colorize(`Pregunta ${id}: ${quiz.question} `,'red'), resp => {
-                if (resp == quiz.answer){
+                if (resp.toLowerCase().trim() == quiz.answer.toLowerCase().trim()){
                     //Correcto
                     biglog('¡Correcto!','green');
                 }else{
