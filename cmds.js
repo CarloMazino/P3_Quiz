@@ -88,10 +88,12 @@ exports.testCmd = (rl, id) => {
             rl.question(colorize(`Pregunta ${id}: ${quiz.question} `,'red'), resp => {
                 if (resp.toLowerCase().trim() == quiz.answer.toLowerCase().trim()){
                     //Correcto
-                    biglog('¡Correcto!','green');
+                    log('Su respuesta es: ');
+                    biglog('Correcta','green');
                 }else{
                     //Incorrecto
-                    biglog('Aber Estudiao.','red');
+                    log('Su respuesta es: ');
+                    biglog('Incorrecta','red');
                 }
                 rl.prompt();
             });
@@ -165,7 +167,7 @@ exports.playCmd = rl => {
         toBeSolved.push(i);
     }
     const playOne = () =>{
-        log(toBeSolved,'green');
+        //log(toBeSolved,'green');
         if ((toBeSolved === null)||(toBeSolved.length===0)){
             log('No hay nada más que preguntar.');
             log('Fin del examen. Aciertos: ');
