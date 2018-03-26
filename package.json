@@ -24,7 +24,9 @@
   "homepage": "https://github.com/CarloMazino/CORE_P2#readme",
   "dependencies": {
     "chalk": "^2.3.1",
-    "figlet": "^1.2.0"
+    "figlet": "^1.2.0",
+    "sequelize": "^4.37.4",
+    "sqlite3": "^3.1.8"
   },
   "devDependencies": {
     "module-js": "^7.0.1"

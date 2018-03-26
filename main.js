@@ -9,7 +9,6 @@ const errorlog = require('./out').errorlog;
 
 //import {colorize, log, biglog, errorlog} from 'out';
 
-
 //Mensaje inicial
 biglog('CORE Quiz','green');
 
